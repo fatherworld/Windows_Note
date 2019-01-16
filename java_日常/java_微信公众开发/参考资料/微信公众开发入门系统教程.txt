@@ -1,0 +1,8 @@
+﻿1.微信公众号开发系统入门教程（公众号注册、开发环境搭建、access_token管理、Demo实现、natapp外网穿透）
+
+link: https://blog.csdn.net/a1786223749/article/details/80787379#3_66
+
+
+2.手把手教你如何微信公众号开发(使用ngrok有问题)
+
+link2: https://blog.csdn.net/Cs_hnu_scw/article/details/79080593
