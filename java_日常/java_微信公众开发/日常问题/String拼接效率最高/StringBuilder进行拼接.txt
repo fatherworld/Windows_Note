@@ -1,0 +1,5 @@
+ StringBuilder sb=new StringBuilder("爱我还是他");
+        sb.append("。");
+        System.out.println(sb.toString());
+        sb.insert(0, "你都已看不到我们的好，");
+        System.out.println(sb.toString());

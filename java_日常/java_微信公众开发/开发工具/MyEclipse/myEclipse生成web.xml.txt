@@ -1,0 +1,4 @@
+对于myEclipse2016生成web.xml(手动）
+	1.右键点击所在项目
+	2.点击JAVA EE TOOLS
+	3.点击Generate Deployment Descriptor Stub

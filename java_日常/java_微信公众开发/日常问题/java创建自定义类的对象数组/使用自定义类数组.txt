@@ -1,0 +1,24 @@
+public class Student{
+     static int number = 0;     // 静态变量的访问可以不用创建类的实例就可就可使用< 类名.属性 >的方法访问
+     String name; // 学生姓名
+
+     Student( ){     // 无参构造函数
+         System.out.println("创建学生成功。。");
+         number++;      // 学生数加1
+     }
+
+     public static void main(String [] args){
+         //  主方法开始
+         System.out.println("学生数："+Student.number);     // 0
+
+         Student [] s;    // 声明要创建的对象数组
+         s = new Student[2];   // 创建对象数组，为对象数组开辟空间
+         s[0] = new Student();  // 创建数组对象，为数组对象开辟空间
+
+         s[0].name = "凌小墨";       // 先声明，再创建，之后才能使用
+
+         System.out.println("学生数：" + Student.number);
+         System.out.println("姓名："+s[0].name);
+
+     }
+}

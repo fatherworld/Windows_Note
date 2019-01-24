@@ -1,0 +1,38 @@
+首先Goo某的翻译, static ：(adj) 静止的,不变的。
+
+　　在所有程序编译运行的过程中，变量都是由系统自动分配内存进行存储的。
+
+　　在这个存储过程中，static所修饰的变量(也就是静态变量)，它所被分配的空间是一直伴随程序运行的，空间将会保持到程序的结束关闭，才会被释放。
+
+　　换句话说：程序运行时，系统分配给静态变量的内存是一直存在的，除非程序被终止。
+
+　　根据这一点来看，假若在定义一个类的过程中，定义了一个static修饰的变量，那么这个类在被加载的同时，被static修饰的变量就存在于内存当中了，这样一来就独立于该类的所有对象，被该类所有对象共享，将对象相关的变成了类相关，所以静态变量也可以称之为类变量。
+
+　　假设一个类中某个属性被static所修饰，那么就可以通过"类名.属性名"来访问。
+
+　　例子：
+
+public class Demo{
+    public static void main(String[] args){
+        Worker w1 = new Worker("Jack");
+        w1.startWork();
+        System.out.println("当前开工的总人数："+Worker.totle);
+        Worker w2 = new Worker("Rose");
+        w2.startWork();
+        System.out.println("当前开工的总人数："+Worker.totle);
+    }
+}
+
+class Worker{
+    String name;
+    static int totle = 0;
+    
+    public Worker(String name){
+        this.name = name;
+    }
+    
+    public void startWork(){
+        totle++;
+        System.out.println("工人："+this.name+"开工了。");
+    }
+}

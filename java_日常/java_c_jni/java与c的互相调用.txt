@@ -1,0 +1,66 @@
+https://www.cnblogs.com/xingyunblog/p/3996484.html(link)
+
+ Java 之JNI编程
+1.什么是JNI？
+
+   JNI：（Java Natibe Inetrface）缩写。
+
+2.为什么要学习JNI?
+ Java 是跨平台的语言，但是在有些时候仍然是有需要调用本地代码
+
+（这些代码通常是由C/C++编写的）.
+
+Sun公司提供的JNI是Java平台的一个功能强大的接口。
+这个JNI接口提供了Java与操作系统本地代码互相调用的功能。(即java调用C++代码)
+
+
+2.在java类中声明一个native的方法。(java工程目录：F:\myEclipseWorkSpace\LearnJava）
+
+TestNative.java代码如下：
+	package cn.ys.itcast;
+
+public class TestNative {
+    public native void sayHello();
+    
+    public native void playVideo();
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+    	
+    	System.loadLibrary("nativeCode");
+        TestNative tst=new TestNative();
+        tst.playVideo();
+    }
+}
+
+其中有两个需要在c++中实现的方法，sayHello()与playVideo()
+
+3.使用Javah命令(在jdk安装目录的bin目录下，在安装了jdk之后应该添加了环境变量)生成包含native方法定义的C/C++头文件，
+
+	编译生成 cn_ys_itcast_TestNative.h
+	cmd 进入TestNative.java所在的src目录，不是TestNative.java目录，不能包含包目录
+	运行命令 javah cn.ys.itcast.TestNative
+		出现编码错误，需要修改TestNative.java中的中文，不能有中文。
+		出现找不到TestNative文件，需要确定包目录和文件不能带java后缀
+4.新建vs的32控制台程序的dll工程（工程目录 C:\Users\ys\Documents\Visual Studio 2015\Projects\nativeCode），添加上一步的cn_ys_itcast_TestNative.h到工程头文件。
+
+5.复制jni.h、jni_md.h到项目下，选中头文件目录—右键—添加现有项—添加这两个。
+	
+
+    注意：
+
+    jni.h在jdk\include目录下，
+
+    jni_md.h在jdk\include\win32目录下
+   ***如果在cn_ys_itcast_TestNative.h中添加<jni.h>无法找到，就将<>改为“”
+
+6.Java类中加载DLL，然后调用声明的native方法。
+	System.loadLibrary("nativeCode");           ***nativeCode是动态库的前置名，前提是动态库能够找到
+
+
+
+7(重要）关闭myclipse软件，重新打开，否则会报错(无法加载动态库文件)
+          因为myclipse每次启动会读一遍系统变量，刚修改后需要重新读取，所以要重启软件
+	再次打开软件运行，就可以看到调用了我们在c++中写的Hello word代码了。
